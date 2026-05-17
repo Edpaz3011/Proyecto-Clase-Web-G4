@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Gb+E19/hO6w=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Soporte\\RiderProjects\\ProyectoClaseG4\\ProyectoClaseG4\\ProyectoClaseG4.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Soporte\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.7\\microsoft.aspnetcore.openapi.10.0.7.nupkg.sha512",
+    "C:\\Users\\Soporte\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
