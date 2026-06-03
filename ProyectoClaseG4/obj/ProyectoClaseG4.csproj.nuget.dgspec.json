@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Soporte\\RiderProjects\\ProyectoClaseG4\\ProyectoClaseG4\\ProyectoClaseG4.csproj": {}
+    "/home/morobnz/RiderProjects/proyecto-clase-web-g4/Proyecto-Clase-Web-G4/ProyectoClaseG4/ProyectoClaseG4.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Soporte\\RiderProjects\\ProyectoClaseG4\\ProyectoClaseG4\\ProyectoClaseG4.csproj": {
+    "/home/morobnz/RiderProjects/proyecto-clase-web-g4/Proyecto-Clase-Web-G4/ProyectoClaseG4/ProyectoClaseG4.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Soporte\\RiderProjects\\ProyectoClaseG4\\ProyectoClaseG4\\ProyectoClaseG4.csproj",
+        "projectUniqueName": "/home/morobnz/RiderProjects/proyecto-clase-web-g4/Proyecto-Clase-Web-G4/ProyectoClaseG4/ProyectoClaseG4.csproj",
         "projectName": "ProyectoClaseG4",
-        "projectPath": "C:\\Users\\Soporte\\RiderProjects\\ProyectoClaseG4\\ProyectoClaseG4\\ProyectoClaseG4.csproj",
-        "packagesPath": "C:\\Users\\Soporte\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Soporte\\RiderProjects\\ProyectoClaseG4\\ProyectoClaseG4\\obj\\",
+        "projectPath": "/home/morobnz/RiderProjects/proyecto-clase-web-g4/Proyecto-Clase-Web-G4/ProyectoClaseG4/ProyectoClaseG4.csproj",
+        "packagesPath": "/home/morobnz/.nuget/packages/",
+        "outputPath": "/home/morobnz/RiderProjects/proyecto-clase-web-g4/Proyecto-Clase-Web-G4/ProyectoClaseG4/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Soporte\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/morobnz/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -82,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\Soporte\\.dotnet\\sdk\\10.0.203/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/home/morobnz/.dotnet/sdk/10.0.202/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
