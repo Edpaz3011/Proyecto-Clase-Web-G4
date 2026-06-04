@@ -13,7 +13,7 @@ public class User
     public string PasswordHash { get; set; } = string.Empty;
     
     // Colocar un rol por defecto
-    public string Role { get; set; } = "user";
+    public string Role { get; set; } = UserRole.Guest;
     
     // Para saber cuando se creo el registro
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

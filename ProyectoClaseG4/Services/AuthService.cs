@@ -39,8 +39,8 @@ public class AuthService
             Id = Guid.NewGuid().ToString(),
             FullName = dto.FullName,
             Email = dto.Email,
-            PasswordHash = HashPasword (dto.Password),
-            Role = "user",
+            PasswordHash = HashPassword (dto.Password),
+            Role = UserRole.Guest,
             CreatedAt = DateTime.UtcNow
 
         };
@@ -58,7 +58,7 @@ public class AuthService
         return user;
     }
 
-    public async Task<string> Login(LoginDto dto)
+    public async Task<AuthResponseDto> Login(LoginDto dto)
     {
         // Buscar al usuario por correo en FS
         var collection = _firebaseService.GetCollection("users");
@@ -90,7 +90,17 @@ public class AuthService
             throw new Exception("Password incorrecto");
         
         // Se completo exitosamente, generamos un token JWT
-        return GenerateToken(user);
+        var token = GenerateToken(user);
+        return new AuthResponseDto
+        {
+            Token = token,
+            UserId = user.Id,
+            FullName = user.FullName,
+            Email = user.Email,
+            Role = user.Role,
+            ExpiresAt = DateTime.UtcNow.AddHours(8)
+
+        };
     }
 
     private string GenerateToken(User user)
@@ -121,12 +131,12 @@ public class AuthService
 
     private bool VerifyPassword(string dtoPassword, string userPasswordHash)
     {
-        return HashPasword(dtoPassword) == userPasswordHash;
+        return HashPassword(dtoPassword) == userPasswordHash;
     }
 
 
     // PARA ENCRIPTAR LA CONTRASEÑA
-    private string HashPasword(string password)
+    private string HashPassword(string password)
     {
        //SHA256 - tipo de encriptacion
        var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
