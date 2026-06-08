@@ -58,6 +58,39 @@ public class AuthService
         return user;
     }
 
+    public async Task<User> RegisterAdmin(RegisterDto dto)
+    {
+        var collection = _firebaseService.GetCollection("users");
+        var existing = await collection
+            .WhereEqualTo("Email", dto.Email)
+            .GetSnapshotAsync();
+        
+        if (existing.Count > 0)
+            throw new Exception("Ya existe un usuario con esa credencial");
+
+        var user = new User
+        {
+            Id = Guid.NewGuid().ToString(),
+            FullName = dto.FullName,
+            Email = dto.Email,
+            PasswordHash = HashPassword(dto.Password),
+            Role = UserRole.Admin,
+            CreatedAt = DateTime.UtcNow
+        };
+        
+        await collection.Document(user.Id).SetAsync(new Dictionary<string, object>
+            {
+                { "Id", user.Id },
+                { "FullName", user.FullName },
+                { "Email", user.Email },
+                { "PasswordHash", user.PasswordHash },
+                { "Role", user.Role },
+                { "CreatedAt", user.CreatedAt }
+            }
+        );
+        return user;
+    }
+    
     public async Task<AuthResponseDto> Login(LoginDto dto)
     {
         // Buscar al usuario por correo en FS
@@ -91,7 +124,7 @@ public class AuthService
         
         // Se completo exitosamente, generamos un token JWT
         var token = GenerateToken(user);
-        return new AuthResponseDto
+        return new AuthResponseDto //modificado
         {
             Token = token,
             UserId = user.Id,

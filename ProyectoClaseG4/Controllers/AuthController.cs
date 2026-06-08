@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoClaseG4.DTOs;
+using ProyectoClaseG4.Models;
 using ProyectoClaseG4.Services;
 
 namespace ProyectoClaseG4.Controllers;
@@ -11,7 +13,7 @@ namespace ProyectoClaseG4.Controllers;
 [Route("api/[controller]")]
 
 public class AuthController :ControllerBase
-{
+{ 
     // Guarda el servicio en una privada readonly
         // Solo de lectura porque no deberia cambiar despues que se hace la inyeccion
         private readonly AuthService _authService;
@@ -46,6 +48,26 @@ public class AuthController :ControllerBase
             }
         }
         
+        // POST /api/Auth/register-admin
+        //solo admins pueden llamar este endpoint
+
+        [HttpPost("register-admin")]
+        [Authorize(Roles = UserRole.Admin)]
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterDto dto)
+        {
+            try
+            {
+                var user = await _authService.RegisterAdmin(dto);
+                return Ok(new { user.Id, user.FullName, user.Email, user.Role });
+            }
+            
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+        
+        
         // La ruta completa seria: POST /api/Auth/login
         [HttpPost("login")]
         public async Task<IActionResult> Login(
@@ -56,11 +78,11 @@ public class AuthController :ControllerBase
             try
             {
                 // Si las credenciales son correctas, recibimos un JWT
-                var token = await _authService.Login(dto);
+                var response = await _authService.Login(dto);
                 
                 //Devolvemos el token al frontend para que lo guarde
                 //El frontend debe mandarlo en cada peticion como Bearer Token
-                return Ok(new { token });
+                return Ok( response );
             }catch(Exception e)
             {
                 // Credenciales invalidas u otro error - 400
