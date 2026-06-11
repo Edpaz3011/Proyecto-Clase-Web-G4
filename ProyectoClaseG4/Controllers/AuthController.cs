@@ -90,4 +90,18 @@ public class AuthController :ControllerBase
             }
         }
     
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto dto)
+        {
+            try
+            {
+                await _authService.ForgotPassword(dto);
+                return Ok(new { message = "Si el correo existe recibiras un email con las instrucciones para cambiar la contraseña" });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+                
+            }
+        }
 }

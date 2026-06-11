@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "fk4mPu26jG4=",
+  "dgSpecHash": "RXGhBYPHw/A=",
   "success": true,
   "projectFilePath": "/home/morobnz/RiderProjects/proyecto-clase-web-g4/Proyecto-Clase-Web-G4/ProyectoClaseG4/ProyectoClaseG4.csproj",
   "expectedPackageFiles": [
+    "/home/morobnz/.nuget/packages/firebaseadmin/3.5.0/firebaseadmin.3.5.0.nupkg.sha512",
     "/home/morobnz/.nuget/packages/google.api.commonprotos/2.17.0/google.api.commonprotos.2.17.0.nupkg.sha512",
     "/home/morobnz/.nuget/packages/google.api.gax/4.13.1/google.api.gax.4.13.1.nupkg.sha512",
     "/home/morobnz/.nuget/packages/google.api.gax.grpc/4.13.1/google.api.gax.grpc.4.13.1.nupkg.sha512",
+    "/home/morobnz/.nuget/packages/google.api.gax.rest/4.13.1/google.api.gax.rest.4.13.1.nupkg.sha512",
     "/home/morobnz/.nuget/packages/google.apis/1.73.0/google.apis.1.73.0.nupkg.sha512",
     "/home/morobnz/.nuget/packages/google.apis.auth/1.73.0/google.apis.auth.1.73.0.nupkg.sha512",
     "/home/morobnz/.nuget/packages/google.apis.core/1.73.0/google.apis.core.1.73.0.nupkg.sha512",

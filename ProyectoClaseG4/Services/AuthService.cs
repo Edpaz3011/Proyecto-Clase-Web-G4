@@ -6,6 +6,7 @@ using ProyectoClaseG4.Models;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using FirebaseAdmin.Auth;
 
 namespace ProyectoClaseG4.Services;
 
@@ -32,11 +33,21 @@ public class AuthService
         if (existing.Count > 0)
             throw new Exception("Ya existe un usuario con este correo");
         
+        //Nuevo - Agrego tambien el usuario a firebase auth para usar la opcion de recuperacion de correo
+        var firebaseUser = await FirebaseAuth.DefaultInstance.CreateUserAsync(new UserRecordArgs()
+            {
+                Email = dto.Email,
+                Password =  dto.Password,
+                DisplayName = dto.FullName,
+            }
+        );
+        
+            
         // Creamos el objeto con la contraseña hasheada
 
         var user = new User
         {
-            Id = Guid.NewGuid().ToString(),
+            Id = firebaseUser.Uid, //Hice un cambio aqui antes era "= Guid.NewGuid().ToString()"
             FullName = dto.FullName,
             Email = dto.Email,
             PasswordHash = HashPassword (dto.Password),
@@ -67,10 +78,20 @@ public class AuthService
         
         if (existing.Count > 0)
             throw new Exception("Ya existe un usuario con esa credencial");
+        
+        //Nuevo - Agrego tambien el usuario a firebase auth para usar la opcion de recuperacion de correo
+        
+        var firebaseUser = await FirebaseAuth.DefaultInstance.CreateUserAsync(new UserRecordArgs()
+            {
+                Email = dto.Email,
+                Password =  dto.Password,
+                DisplayName = dto.FullName,
+            }
+        );
 
         var user = new User
         {
-            Id = Guid.NewGuid().ToString(),
+            Id = firebaseUser.Uid, //Hice un cambio aqui antes era "= Guid.NewGuid().ToString()"
             FullName = dto.FullName,
             Email = dto.Email,
             PasswordHash = HashPassword(dto.Password),
@@ -136,6 +157,41 @@ public class AuthService
         };
     }
 
+    // Task para recuperar la contraseña
+    public async Task ForgotPassword(ForgotPasswordDto dto)
+    {
+        // Verificar que el usuario existe en Firestore
+        var collection = _firebaseService.GetCollection("users");
+        var snapshot = await collection
+            .WhereEqualTo("Email", dto.Email)
+            .GetSnapshotAsync();
+
+      
+        if (snapshot.Count == 0)
+            throw new Exception("Si el correo está registrado recibirás un email");
+
+        // Firebase genera el link de reset y manda el email automáticamente
+        
+            var apiKey = _configuration["Firebase:ApiKey"];
+            var url = $"https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key={apiKey}";
+
+            var payload = new
+            {
+                requestType = "PASSWORD_RESET",
+                email = dto.Email,
+            };
+            
+            using var httpClient = new HttpClient();
+            var json = System.Text.Json.JsonSerializer.Serialize(payload);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync(url, content);
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Error al enviar el codigo de recuperacion");
+
+    }
+    
+    
     private string GenerateToken(User user)
     {
         // El Token lleva cierta informacion, Id, Email y Role de usuario que hizo login

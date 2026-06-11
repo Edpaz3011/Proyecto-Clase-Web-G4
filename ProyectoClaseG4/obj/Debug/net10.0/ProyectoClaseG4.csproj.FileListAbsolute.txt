@@ -125,3 +125,5 @@ C:/Users/Soporte/RiderProjects/ProyectoClaseG4/ProyectoClaseG4/bin/Debug/net10.0
 /home/morobnz/RiderProjects/proyecto-clase-web-g4/Proyecto-Clase-Web-G4/ProyectoClaseG4/obj/Debug/net10.0/ProyectoClaseG4.pdb
 /home/morobnz/RiderProjects/proyecto-clase-web-g4/Proyecto-Clase-Web-G4/ProyectoClaseG4/obj/Debug/net10.0/ProyectoClaseG4.genruntimeconfig.cache
 /home/morobnz/RiderProjects/proyecto-clase-web-g4/Proyecto-Clase-Web-G4/ProyectoClaseG4/obj/Debug/net10.0/ref/ProyectoClaseG4.dll
+/home/morobnz/RiderProjects/proyecto-clase-web-g4/Proyecto-Clase-Web-G4/ProyectoClaseG4/bin/Debug/net10.0/FirebaseAdmin.dll
+/home/morobnz/RiderProjects/proyecto-clase-web-g4/Proyecto-Clase-Web-G4/ProyectoClaseG4/bin/Debug/net10.0/Google.Api.Gax.Rest.dll

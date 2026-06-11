@@ -1,3 +1,6 @@
+using FirebaseAdmin;
+using FirebaseAdmin.Auth;
+using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Firestore;
 
 namespace ProyectoClaseG4.Services;
@@ -17,6 +20,16 @@ public class FirebaseService
         
         // Esta es una variable de entorno que usa el SDK de G, para autenticarse
         Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", credentialPath);
+        
+        // ← NUEVO: inicializar Firebase App para poder usar FirebaseAuth
+        // Solo se inicializa si no existe ya una instancia
+        if (FirebaseApp.DefaultInstance == null)
+        {
+            FirebaseApp.Create(new AppOptions
+            {
+                Credential = GoogleCredential.FromFile(credentialPath)
+            });
+        }
         
         // Ahora, aqui colocamos el project id
         _firestoreDb = FirestoreDb.Create("proyecto-clase-g4");
