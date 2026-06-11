@@ -1,6 +1,8 @@
 Config/*
-appsettings.json
-appsettings.Development.json
+ProyectoClaseG4/appsettings.json
+ProyectoClaseG4/appsettings.Development.json
+ProyectoClaseG4/bin/
+ProyectoClaseG4/obj/
 
 bin/
 obj/
