@@ -39,6 +39,30 @@ public class PaymentController : ControllerBase
         {
             return BadRequest("El monto debe ser mayor que cero.");
         }
+        if (string.IsNullOrWhiteSpace(payment.ExpirationDate))
+{
+    return BadRequest("Fecha de vencimiento requerida.");
+}
+
+if (!DateTime.TryParseExact(
+        payment.ExpirationDate,
+        "MM/yy",
+        null,
+        System.Globalization.DateTimeStyles.None,
+        out DateTime expirationDate))
+{
+    return BadRequest("Formato de fecha inválido. Use MM/YY.");
+}
+
+var lastDayOfMonth = new DateTime(
+    expirationDate.Year,
+    expirationDate.Month,
+    DateTime.DaysInMonth(expirationDate.Year, expirationDate.Month));
+
+if (lastDayOfMonth < DateTime.Today)
+{
+    return BadRequest("La tarjeta está vencida.");
+}
 
         payment.Status = "Success";
         payment.PaymentDate = DateTime.UtcNow;
